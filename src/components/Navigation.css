@@ -1,0 +1,40 @@
+.nav {
+    list-style-type: none;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    padding: 0px;
+    margin-top: 0px;
+    background-color: #333333;
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+    align-content: center;
+}
+
+.dropdown-item:hover {
+    background-color: #EAEAEA;
+}
+
+.nav-link {
+    padding: 20px 30px;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-link:active {
+    color: white;
+}
+
+.nav-link-selected {
+    background-color: #777777;
+}
+
+.bg-dark-grey {
+    background-color: #333333;
+}
+
+.main {
+    margin: 80px 30px;
+}
+  
