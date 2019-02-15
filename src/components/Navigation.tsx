@@ -8,6 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faClipboardList, faStoreAlt, faUserCircle, faUser } from '@fortawesome/free-solid-svg-icons';
+import Store from './Store';
 
 const Navigation:FunctionComponent = () => {
   return (
@@ -44,6 +45,7 @@ const Navigation:FunctionComponent = () => {
         </ul>*/}
         <div className='main'>
             <Route exact path="/home" component={Home}/>
+            <Route exact path="/store" component={Store}/>
         </div>
     </div>
   )
