@@ -1,9 +1,51 @@
 import React, { FunctionComponent, useState } from 'react';
 import './Store.css';
 
+
 const Store:FunctionComponent = () => {
+    const [image, setImage] = useState<File | null>(null);
+    const [preview, setPreview] = useState('');
+    
+    const handleUpload = (files: FileList | null) => {
+        if(files === null) return;
+        const file: File = files[0];
+        const reader = new FileReader();
+        reader.onload = e => {
+            if(typeof reader.result === 'string') {
+                setPreview(reader.result)
+            }
+        }
+        reader.readAsDataURL(file);
+        setImage(file);
+    }
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if(!image) return
+        console.log(image)
+        const formData: FormData = new FormData();
+        formData.append("image", image)
+        console.log('fetching...')
+        fetch('http://localhost:3002/upload', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
+        }).then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));
+    }
+
     return (
-        <img src="https://res.cloudinary.com/schoolbux/image/upload/v1550271379/test/lbwbntedprdth94uu6tx.jpg" alt="pencil" />
+        <div>
+            <img src="https://res.cloudinary.com/schoolbux/image/upload/v1550271379/test/lbwbntedprdth94uu6tx.jpg" alt="pencil" />
+            <form onSubmit={handleSubmit}>
+                <input onChange={e => handleUpload(e.target.files)} required type='file' accept="image/*" />
+                <input type='submit'/>
+            </form>
+            {preview && <img src={preview} alt='preview'/>}
+        </div>
     )
 }
 
