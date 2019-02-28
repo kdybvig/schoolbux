@@ -1,0 +1,12 @@
+.user-form-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.user-form-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-left: 8px;
+    margin-bottom: 2px;
+}
