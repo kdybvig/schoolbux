@@ -1,5 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import './Store.css';
+import ProductCard from './ProductCard';
+
 
 
 const Store:FunctionComponent = () => {
@@ -39,8 +41,8 @@ const Store:FunctionComponent = () => {
 
     return (
         <div>
-            <img src="https://res.cloudinary.com/schoolbux/image/upload/v1550271379/test/lbwbntedprdth94uu6tx.jpg" alt="pencil" />
-            <form onSubmit={handleSubmit}>
+            <ProductCard imgSrc="https://res.cloudinary.com/schoolbux/image/upload/v1550271379/test/lbwbntedprdth94uu6tx.jpg" title="Pencil"/>
+                <form onSubmit={handleSubmit}>
                 <input onChange={e => handleUpload(e.target.files)} required type='file' accept="image/*" />
                 <input type='submit'/>
             </form>
