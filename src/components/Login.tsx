@@ -7,6 +7,10 @@ const Login:FunctionComponent = () => {
     const user = useState('');
     const password = useState('');
 
+    const handleChange = () => {
+      
+    }
+
     return (
       <div className="col-sm-6 offset-sm-3">
         <h1 className="user-form-title">Sign In</h1> 
