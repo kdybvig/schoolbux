@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Navigation from './Navigation';
 import { shallow } from 'enzyme';
 
 it('renders without crashing', () => {
-  shallow(<App />)
+  shallow(<Navigation />)
 });
