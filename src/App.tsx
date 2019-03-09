@@ -7,23 +7,26 @@ import Home from './components/Home';
 import Store from './components/Store';
 import Login from './components/Login';
 import Register from './components/Register';
+import {UserProvider} from './components/UserProvider';
 
 
 const App = () => {
   return (
-    <Router>
-      <div className="App">
-        <header className="App-header">
-          <Navigation/>
-        </header>
-        <main>
-          <Route exact path="/" component={Home}/>
-          <Route path="/store" component={Store}/>
-          <Route path="/login" component={Login}/>
-          <Route path="/register" component={Register}/>
-        </main>
-      </div>
-    </Router>
+    <UserProvider>
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <Navigation/>
+          </header>
+          <main>
+            <Route exact path="/" component={Home}/>
+            <Route path="/store" component={Store}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
+          </main>
+        </div>
+      </Router>
+    </UserProvider>
   );
 }
 
