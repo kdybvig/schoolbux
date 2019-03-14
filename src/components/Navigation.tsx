@@ -41,6 +41,9 @@ const Navigation:FunctionComponent = () => {
                                     <LinkContainer to="/login">
                                         <NavDropdown.Item>Sign In</NavDropdown.Item>
                                     </LinkContainer>
+                                    <LinkContainer to="/register">
+                                        <NavDropdown.Item>Create An Account</NavDropdown.Item>
+                                    </LinkContainer>
                                 </NavDropdown>
     
                         }
