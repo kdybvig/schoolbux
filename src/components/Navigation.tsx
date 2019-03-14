@@ -31,15 +31,18 @@ const Navigation:FunctionComponent = () => {
                         </LinkContainer>
                         {
                             user? 
-                                <NavDropdown alignRight title={<span><FontAwesomeIcon icon={faUserCircle}/> {user}</span>} id="collasible-nav-dropdown">
+                                <NavDropdown alignRight title={<span><FontAwesomeIcon icon={faUserCircle}/> {user}</span>} id="nav-dropdown">
                                     <NavDropdown.Item>Settings</NavDropdown.Item>
                                     <NavDropdown.Item>My Profile</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
                                 </NavDropdown> : 
-                                <LinkContainer to="/login">
-                                    <Nav.Link active={window.location.pathname === '/login'}>Sign In</Nav.Link>
-                                </LinkContainer>
+                                <NavDropdown alignRight title={<span><FontAwesomeIcon icon={faUserCircle}/> Account</span>} id="nav-dropdown">
+                                    <LinkContainer to="/login">
+                                        <NavDropdown.Item>Sign In</NavDropdown.Item>
+                                    </LinkContainer>
+                                </NavDropdown>
+    
                         }
                     </Nav>
                 </Navbar.Collapse>

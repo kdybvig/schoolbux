@@ -16,6 +16,10 @@
     background-color: #EAEAEA;
 }
 
+.dropdown-item {
+    margin-right: 0px;
+}
+
 .nav-link {
     padding: 20px 30px;
     color: white;
@@ -28,6 +32,18 @@
 
 .nav-link-selected {
     background-color: #777777;
+}
+
+.dropdown-item.active {
+    color: black;
+    background-color: white;
+}
+
+.dropdown-item:focus {
+    color: black;
+}
+.dropdown-item.active:hover {
+    background-color: #EAEAEA;
 }
 
 .bg-dark-grey {
