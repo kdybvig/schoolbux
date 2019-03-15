@@ -16,7 +16,7 @@ const Register:FunctionComponent = () => {
   const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState('');
 
-  const { login }  = useContext(UserContext);
+  const { register }  = useContext(UserContext);
 
   const handleSubmit = async(e: FormEvent) => {
       e.preventDefault()
@@ -30,7 +30,8 @@ const Register:FunctionComponent = () => {
       }
       setError('')
       setIsDisabled(true)
-      const activeUser = await login(username)
+      const activeUser = await register({email, username, password, confirm})
+      console.log('username', activeUser)
       setRedirect(true)
   }
 

@@ -10,7 +10,7 @@ import { UserContext } from './UserProvider'
 
 const Navigation:FunctionComponent = () => {
     const { user, logout } = useContext(UserContext)
-
+ 
     return (
         <div>
             <Navbar expand='md' fixed='top' bg='dark-grey' variant='dark' className="d-flex">
@@ -35,7 +35,9 @@ const Navigation:FunctionComponent = () => {
                                     <NavDropdown.Item>Settings</NavDropdown.Item>
                                     <NavDropdown.Item>My Profile</NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+                                    <LinkContainer to="/login">
+                                        <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+                                    </LinkContainer>
                                 </NavDropdown> : 
                                 <NavDropdown alignRight title={<span><FontAwesomeIcon icon={faUserCircle}/> Account</span>} id="nav-dropdown">
                                     <LinkContainer to="/login">
