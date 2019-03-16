@@ -1,9 +1,12 @@
 import React, { FunctionComponent, useState, useContext, FormEvent } from 'react';
 import Form from "react-bootstrap/Form";
-import './UserForms.css';
-import Button from "react-bootstrap/Button";
-import {UserContext} from './UserProvider';
 import { Redirect } from 'react-router';
+
+import Button from "react-bootstrap/Button";
+
+import './UserForms.css';
+import {UserContext} from './UserProvider';
+
 
 
 

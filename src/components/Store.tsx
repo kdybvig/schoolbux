@@ -1,13 +1,24 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useContext } from 'react';
+
+
 import './Store.css';
+
 import ProductCard from './ProductCard';
+import { UserContext } from './UserProvider'
+import Unauthorized from './Unauthorized'
+
 
 
 
 const Store:FunctionComponent = () => {
+    const { isAuth } = useContext(UserContext);
+
     const [image, setImage] = useState<File | null>(null);
     const [preview, setPreview] = useState('');
     
+
+    if(!isAuth) return <Unauthorized />
+
     const handleUpload = (files: FileList | null) => {
         if(files === null) return;
         const file: File = files[0];

@@ -29,10 +29,11 @@ export const UserContext = createContext({
     user: '',
     isAuth: false,
     login: (userInfo: userInfo) : any => {
-        return {success: false, user: ''}
+        return {success: false, user: ''};
     },
     logout: () : void => {},
-    register: (newUser: newUser) : any => {}
+    register: (newUser: newUser) : any => {},
+    refreshUser: (localUser: string) : any => { console.log()}
 });
 
 export const UserProvider:FunctionComponent<{}> = (props) => {
@@ -52,13 +53,13 @@ export const UserProvider:FunctionComponent<{}> = (props) => {
             }))
             const response = await res.json()
             if (response.username) {
-                login({user: newUser.username, password: newUser.password})
-                return {success: true, user: response.username, error:''}
+                login({user: newUser.username, password: newUser.password});
+                return {success: true, user: response.username, error:''};
             }
-            return {success: false, user: '', error: response.error}
+            return {success: false, user: '', error: response.error};
         } catch(err) {
-            console.log(err)
-            return {success: false, user: '', error: 'Network error'}
+            console.log(err);
+            return {success: false, user: '', error: 'Network error'};
         }
     }
 
@@ -74,23 +75,33 @@ export const UserProvider:FunctionComponent<{}> = (props) => {
             }))
             const response = await res.json();
             if (response.username) {
-                setIsAuth(true)
-                setUser(response.username)
-                return {success: true, user: response.username, error: ''}
+                setIsAuth(true);
+                setUser(response.username);
+                localStorage.setItem("jwtToken", response.token);
+                return {success: true, user: response.username, error: ''};
             }
-            return {success: false, user: '', error: response.error}
+            return {success: false, user: '', error: response.error};
         } catch(err) {
-            console.log(err)
-            return {success: false, user: '', error: 'Network error'}
+            console.log(err);
+            return {success: false, user: '', error: 'Network error'};
         }
         
     }
 
     const logout = (): void => {
-        setUser('')
+        setUser('');
+        setIsAuth(false);
+        localStorage.removeItem("jwtToken");
     }
+
+    const refreshUser = (localUser: string): void => {
+        console.log('localUser :', localUser);
+        setUser(localUser);
+        setIsAuth(true);
+    }
+
     return (
-        <UserContext.Provider value={{user, isAuth, login, logout, register}}>
+        <UserContext.Provider value={{user, isAuth, login, logout, register, refreshUser}}>
             {props.children}
         </UserContext.Provider>
     )
