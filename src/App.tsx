@@ -31,7 +31,8 @@ const App = () => {
   const decodedUser: decodedUser | undefined = jwtToken ? jwt_decode(jwtToken) : undefined
   const { refreshUser, user } = useContext(UserContext);
   console.log(decodedUser ? decodedUser.username: 'no user')
-  if(decodedUser) {
+  const isTokenExpired = decodedUser ? Date.now() < Number(decodedUser.exp) * 1000 : false
+  if(decodedUser && !isTokenExpired) {
     refreshUser(decodedUser.username)
   }
 
