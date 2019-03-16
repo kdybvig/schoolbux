@@ -24,16 +24,9 @@ const Login:FunctionComponent = () => {
       setRedirect(true)
       return
     }
-
-    clearForm()
+    setIsDisabled(false)
     setError(response.error)
     
-  }
-
-  const clearForm = () => {
-    setUser('');
-    setPassword('');
-    setIsDisabled(false);
   }
 
   if ( redirect ) return <Redirect to='/'/>
