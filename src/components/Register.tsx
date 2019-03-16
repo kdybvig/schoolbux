@@ -89,7 +89,7 @@ const Register:FunctionComponent = () => {
             return (
             <Form.Group key={index} controlId={`register${capitalize(inputInfo.name)}`}>
               <Form.Label className="user-form-label">{inputInfo.text}</Form.Label>
-              <Form.Control type={inputInfo.type} placeholder={inputInfo.text.toLowerCase()} value={inputInfo.value} onBlur={inputInfo.onBlur}  name={inputInfo.name} onChange={handleChange} />
+              <Form.Control disabled={isDisabled} type={inputInfo.type} placeholder={inputInfo.text.toLowerCase()} value={inputInfo.value} onBlur={inputInfo.onBlur}  name={inputInfo.name} onChange={handleChange} />
             </Form.Group>
             )
           })
