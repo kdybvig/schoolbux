@@ -35,7 +35,6 @@ const Store:FunctionComponent = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if(!image) return
-        console.log(image)
         const formData: FormData = new FormData();
         formData.append("image", image)
         console.log('fetching...')
@@ -51,7 +50,7 @@ const Store:FunctionComponent = () => {
     }
 
     return (
-        <div>
+        <div id="store-items">
             <ProductCard imgSrc="https://res.cloudinary.com/schoolbux/image/upload/v1550271379/test/lbwbntedprdth94uu6tx.jpg" title="Pencil"/>
                 <form onSubmit={handleSubmit}>
                 <input onChange={e => handleUpload(e.target.files)} required type='file' accept="image/*" />
