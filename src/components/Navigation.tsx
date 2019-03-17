@@ -9,7 +9,17 @@ import { faShoppingCart, faClipboardList, faStoreAlt, faUserCircle, faUser } fro
 import { UserContext } from './UserProvider'
 
 const Navigation:FunctionComponent = () => {
-    const { user, logout } = useContext(UserContext)
+    const { user, logout, isAuth } = useContext(UserContext)
+
+    const setLinks = () => {
+        return isAuth ? 
+            [
+                {icon:<FontAwesomeIcon icon={faStoreAlt}/>, label:' Store', location: '/store'}
+            ] : 
+            []
+    }
+    
+    const links = setLinks();
  
     return (
         <div>
@@ -20,7 +30,17 @@ const Navigation:FunctionComponent = () => {
                 <Navbar.Toggle />
                 <Navbar.Collapse> 
                     <Nav className='ml-auto'>
-                        <LinkContainer to="/store">
+                        {
+                            links.map((link,index) => {
+                                const {icon, label, location} = link;
+                                return (
+                                    <LinkContainer to={location}>
+                                        <Nav.Link active={window.location.pathname === location}>{icon}{label}</Nav.Link>
+                                    </LinkContainer>
+                                )
+                            })
+                        }
+                        {/* <LinkContainer to="/store">
                             <Nav.Link active={window.location.pathname === '/store'}><FontAwesomeIcon icon={faStoreAlt}/> Store</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/wishlist">
@@ -28,7 +48,7 @@ const Navigation:FunctionComponent = () => {
                         </LinkContainer>
                         <LinkContainer to="/cart">
                             <Nav.Link active={window.location.pathname === '/cart'}><FontAwesomeIcon icon={faShoppingCart}/> Cart</Nav.Link>
-                        </LinkContainer>
+                        </LinkContainer> */}
                         {
                             user? 
                                 <NavDropdown alignRight title={<span><FontAwesomeIcon icon={faUserCircle}/> {user}</span>} id="nav-dropdown">
