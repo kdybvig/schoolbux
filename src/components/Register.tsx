@@ -44,6 +44,7 @@ const Register:FunctionComponent = () => {
       const activeUser = await register({email, username, password, confirm})
       if(activeUser.error) {
         setError(activeUser.error)
+        setUserState(prevState=>({...prevState, isDisabled: false}))
       } else {
         setRedirect(true)
       }
@@ -74,7 +75,7 @@ const Register:FunctionComponent = () => {
     {name: 'password', text: 'Password', type: 'password', value: password}, 
     {name: 'confirm', text:'Confirm Password', type: 'password', value: confirm},
     {name: 'school', text: 'School Name', type: 'text', value: school },
-    {name: 'mascot', text: 'School Mascot', type: 'text', value: mascot, onBlur: handleMascotBlur},
+    {name: 'mascot', text: 'School Mascot', type: 'text', value: mascot, onBlur: handleMascotBlur, optional: true},
     {name: 'currency', text: 'School Currency', type: 'text', value: currency}
   ]
   if(redirect) return <Redirect to='/' />
@@ -85,11 +86,11 @@ const Register:FunctionComponent = () => {
       {error && <p style={{color: 'red'}}>{error}</p>}
       <Form onSubmit={handleSubmit}>
         {
-          inputs.map((inputInfo, index) => {
+          inputs.map((input, index) => {
             return (
-            <Form.Group key={index} controlId={`register${capitalize(inputInfo.name)}`}>
-              <Form.Label className="user-form-label">{inputInfo.text}</Form.Label>
-              <Form.Control disabled={isDisabled} type={inputInfo.type} placeholder={inputInfo.text.toLowerCase()} value={inputInfo.value} onBlur={inputInfo.onBlur}  name={inputInfo.name} onChange={handleChange} />
+            <Form.Group key={index} controlId={`register${capitalize(input.name)}`}>
+              <Form.Label className="user-form-label">{input.text}</Form.Label>
+              <Form.Control required={!input.optional} disabled={isDisabled} type={input.type} placeholder={input.text.toLowerCase()} value={input.value} onBlur={input.onBlur}  name={input.name} onChange={handleChange} />
             </Form.Group>
             )
           })
