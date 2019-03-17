@@ -12,8 +12,10 @@ import { singular } from 'pluralize';
 const Register:FunctionComponent = () => {
 
   const initialUserState = {
-    email: '',
+    firstName: '',
+    lastName: '',
     username: '',
+    email: '',
     password: '',
     confirm: '',
     school: '',
@@ -23,7 +25,7 @@ const Register:FunctionComponent = () => {
     isDisabled: false
   }
 
-  const [{email, username, school, mascot, singleMascot, currency, password, confirm, isDisabled}, setUserState] = useState(initialUserState);
+  const [{firstName, lastName, username, email, school, mascot, singleMascot, currency, password, confirm, isDisabled}, setUserState] = useState(initialUserState);
   const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState('');
 
@@ -70,8 +72,10 @@ const Register:FunctionComponent = () => {
   }
 
   const inputs = [
-    {name: 'email', text:'Email Address', type: 'email', value: email},
+    {name: 'firstName', text: 'First Name', type: 'text', value: firstName},
+    {name: 'lastName', text: 'Last Name', type: 'text', value: lastName},
     {name: 'username', text: 'Username', type: 'text', value: username},
+    {name: 'email', text:'Email Address', type: 'email', value: email},
     {name: 'password', text: 'Password', type: 'password', value: password}, 
     {name: 'confirm', text:'Confirm Password', type: 'password', value: confirm},
     {name: 'school', text: 'School Name', type: 'text', value: school },
