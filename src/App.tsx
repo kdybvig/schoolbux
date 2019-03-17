@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 
 import {UserContext} from './components/UserProvider';
+import { faPaintRoller } from '@fortawesome/free-solid-svg-icons';
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
   interface decodedUser {
     id: string,
     username: string,
+    role: string,
     iat: string,
     exp: string,
     issueDate: string,
@@ -30,13 +32,10 @@ const App = () => {
 
   const decodedUser: decodedUser | undefined = jwtToken ? jwt_decode(jwtToken) : undefined
   const { refreshUser, user } = useContext(UserContext);
-  console.log(decodedUser ? decodedUser.username: 'no user')
-  const isTokenExpired = decodedUser ? Date.now() < Number(decodedUser.exp) * 1000 : false
+  const isTokenExpired = decodedUser ? Date.now() > Number(decodedUser.exp) * 1000 : false
   if(decodedUser && !isTokenExpired) {
-    refreshUser(decodedUser.username)
+    refreshUser(decodedUser.username, decodedUser.role)
   }
-
-  console.log(user)
 
   return (
       <Router>

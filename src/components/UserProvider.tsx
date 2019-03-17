@@ -33,17 +33,19 @@ interface registerReturn {
 export const UserContext = createContext({
     user: '',
     isAuth: false,
+    role: '',
     login: (userInfo: userInfo) : any => {
         return {success: false, user: ''};
     },
     logout: () : void => {},
     register: (newUser: newUser) : any => {},
-    refreshUser: (localUser: string) : any => { console.log()}
+    refreshUser: (localUser: string, localRole: string) => { }
 });
 
 export const UserProvider:FunctionComponent<{}> = (props) => {
     const [user, setUser] = useState('');
     const [isAuth, setIsAuth] = useState(false);
+    const [role, setRole] = useState('');
     const apiUrl = "http://localhost:5000/users/"
     const register = async(newUser: newUser): Promise<registerReturn> => {
         const url= apiUrl + "register";
@@ -99,14 +101,14 @@ export const UserProvider:FunctionComponent<{}> = (props) => {
         localStorage.removeItem("jwtToken");
     }
 
-    const refreshUser = (localUser: string): void => {
-        console.log('localUser :', localUser);
+    const refreshUser = (localUser: string, localRole: string): void => {
+        setRole(localRole)
         setUser(localUser);
         setIsAuth(true);
     }
 
     return (
-        <UserContext.Provider value={{user, isAuth, login, logout, register, refreshUser}}>
+        <UserContext.Provider value={{user, isAuth, login, logout, register, refreshUser, role}}>
             {props.children}
         </UserContext.Provider>
     )
