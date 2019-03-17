@@ -34,7 +34,7 @@ const Navigation:FunctionComponent = () => {
                             links.map((link,index) => {
                                 const {icon, label, location} = link;
                                 return (
-                                    <LinkContainer to={location}>
+                                    <LinkContainer key={`NavLink-${index}`} to={location}>
                                         <Nav.Link active={window.location.pathname === location}>{icon}{label}</Nav.Link>
                                     </LinkContainer>
                                 )
