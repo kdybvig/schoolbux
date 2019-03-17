@@ -2,10 +2,15 @@ import React, { FunctionComponent, createContext, useState } from 'react';
 import Login from './Login';
 
 interface newUser {
+    firstName: string,
+    lastName: string,
     email: string,
     username: string,
     password: string,
-    confirm: string
+    confirm: string,
+    school: string,
+    mascot: string,
+    currency: string
 }
 
 interface userInfo {

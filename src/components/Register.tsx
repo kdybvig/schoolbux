@@ -43,7 +43,7 @@ const Register:FunctionComponent = () => {
       }
       setError('')
       setUserState(prevState => ({...prevState, isDisabled:true}))
-      const activeUser = await register({email, username, password, confirm})
+      const activeUser = await register({firstName, lastName, email, username, password, confirm, school, mascot, currency})
       if(activeUser.error) {
         setError(activeUser.error)
         setUserState(prevState=>({...prevState, isDisabled: false}))
