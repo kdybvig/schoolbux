@@ -6,21 +6,28 @@ import Button from "react-bootstrap/Button";
 
 import './UserForms.css';
 import {UserContext} from './UserProvider';
+import useForm from '../hooks/useForm';
 
 
 
 
 const Login:FunctionComponent = () => {
 
-  const [user, setUser] = useState('');
-  const [isDisabled, setIsDisabled] = useState(false)
-  const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
-  const [error, setError] = useState('');
+  
+  const { 
+    handleSubmit, 
+    handleChange, 
+    values, 
+    isDisabled, setIsDisabled, 
+    error, setError
+  } = useForm(submitFunction)
+
+  const {user, password} = values;
+
   const { login, user: username}  = useContext(UserContext);
   
-  const handleSubmit = async(e: FormEvent) => {
-    e.preventDefault()
+  async function submitFunction (e: FormEvent) {
     setIsDisabled(true)
     const response = await login({user, password})
     if(response.success) {
@@ -40,11 +47,11 @@ const Login:FunctionComponent = () => {
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="loginUser">
           <Form.Label className="user-form-label">Email or username</Form.Label>
-          <Form.Control required disabled={isDisabled} placeholder="Enter email or username" value={user} onChange={(e: any) => setUser(e.target.value)} />
+          <Form.Control required disabled={isDisabled} placeholder="Enter email or username" name='user' value={user} onChange={handleChange} />
         </Form.Group>
         <Form.Group controlId="loginPassword">
           <Form.Label className="user-form-label">Password</Form.Label>
-          <Form.Control required disabled={isDisabled} type="password" placeholder="Password" value={password} onChange={(e: any) => setPassword(e.target.value)}/>
+          <Form.Control required disabled={isDisabled} type="password" placeholder="Password" name='password' value={password} onChange={handleChange}/>
         </Form.Group>
         <Button variant="success" type="submit">
           Sign In

@@ -1,22 +1,22 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, FormEvent } from 'react';
 
 
 interface values {
     [key: string] : (string)
 }
-const useForm = (submitFunction: (e: any) => void) => {
+const useForm = (submitFunction: (e: FormEvent<Element>) => void) => {
     const [values, setValues] = useState<values>({});
     const [isDisabled, setIsDisabled] = useState(false);
     const [error, setError] = useState('');
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: FormEvent<Element>) => {
         e.preventDefault();
         submitFunction(e);
     }
 
     const handleChange = (e: any) => {
         e.preventDefault()
-        const {name, value} = e.target
+        const {name, value} = e.currentTarget
         setValues(prevValues=>({...prevValues, [name] : value}))
     }
 

@@ -20,13 +20,12 @@ const Register:FunctionComponent = () => {
     error, setError, 
     capitalize 
   } = useForm(submitFunction)
-  
+
   const { firstName, lastName, email, username, password, confirm, school, mascot, currency, singleMascot } = values;
 
   const { register }  = useContext(UserContext);
 
   async function submitFunction (e: FormEvent) {
-      e.preventDefault()
       if(password.length > 20 || password.length < 8) {
         setError('Password must be between 8 and 20 characters')
         return
