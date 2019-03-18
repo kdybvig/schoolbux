@@ -12,7 +12,15 @@ const Register:FunctionComponent = () => {
   
   const [redirect, setRedirect] = useState(false);
 
-  const { handleSubmit, handleChange, values, setValues, isDisabled, setIsDisabled, error, setError, capitalize } = useForm(submitFunction)
+  const { 
+    handleSubmit, 
+    handleChange, 
+    values, setValues, 
+    isDisabled, setIsDisabled, 
+    error, setError, 
+    capitalize 
+  } = useForm(submitFunction)
+  
   const { firstName, lastName, email, username, password, confirm, school, mascot, currency, singleMascot } = values;
 
   const { register }  = useContext(UserContext);
@@ -37,13 +45,6 @@ const Register:FunctionComponent = () => {
         setRedirect(true)
       }
   }
-
-  // const capitalize = (str: string): string => {
-  //   if(str.indexOf(' ') >= 0) return (
-  //     str.split(' ').map(str => capitalize(str)).join(' ')
-  //   ) 
-  //   return str.charAt(0).toUpperCase() + str.slice(1);
-  // }
 
   const handleMascotBlur = (e: any) => {
     if(!mascot || currency && currency !== `${singleMascot} Bux`) return
