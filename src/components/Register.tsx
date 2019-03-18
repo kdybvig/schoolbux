@@ -4,34 +4,20 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { UserContext } from './UserProvider';
 import { Redirect } from 'react-router';
-import { userInfo } from 'os';
-import { string } from 'prop-types';
 import { singular } from 'pluralize';
+import useForm from '../hooks/useForm';
 
 
 const Register:FunctionComponent = () => {
-
-  const initialUserState = {
-    firstName: '',
-    lastName: '',
-    username: '',
-    email: '',
-    password: '',
-    confirm: '',
-    school: '',
-    mascot: '',
-    singleMascot: '',
-    currency: '',
-    isDisabled: false
-  }
-
-  const [{firstName, lastName, username, email, school, mascot, singleMascot, currency, password, confirm, isDisabled}, setUserState] = useState(initialUserState);
+  
   const [redirect, setRedirect] = useState(false);
-  const [error, setError] = useState('');
+
+  const { handleSubmit, handleChange, values, setValues, isDisabled, setIsDisabled, error, setError, capitalize } = useForm(submitFunction)
+  const { firstName, lastName, email, username, password, confirm, school, mascot, currency, singleMascot } = values;
 
   const { register }  = useContext(UserContext);
 
-  const handleSubmit = async(e: FormEvent) => {
+  async function submitFunction (e: FormEvent) {
       e.preventDefault()
       if(password.length > 20 || password.length < 8) {
         setError('Password must be between 8 and 20 characters')
@@ -42,33 +28,27 @@ const Register:FunctionComponent = () => {
           return
       }
       setError('')
-      setUserState(prevState => ({...prevState, isDisabled:true}))
+      setIsDisabled(true)
       const activeUser = await register({firstName, lastName, email, username, password, confirm, school, mascot, currency})
       if(activeUser.error) {
         setError(activeUser.error)
-        setUserState(prevState=>({...prevState, isDisabled: false}))
+        setIsDisabled(false)
       } else {
         setRedirect(true)
       }
   }
 
-  const handleChange = (e: any) => {
-    e.preventDefault()
-    const {name, value} = e.currentTarget;
-    setUserState(prevState => ({...prevState, [name]:value}))
-  }
-
-  const capitalize = (str: string): string => {
-    if(str.indexOf(' ') >= 0) return (
-      str.split(' ').map(str => capitalize(str)).join(' ')
-    ) 
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
+  // const capitalize = (str: string): string => {
+  //   if(str.indexOf(' ') >= 0) return (
+  //     str.split(' ').map(str => capitalize(str)).join(' ')
+  //   ) 
+  //   return str.charAt(0).toUpperCase() + str.slice(1);
+  // }
 
   const handleMascotBlur = (e: any) => {
     if(!mascot || currency && currency !== `${singleMascot} Bux`) return
     const newSingleMascot = capitalize(singular(mascot))
-    setUserState(prevState => ({...prevState, singleMascot: newSingleMascot, currency: `${newSingleMascot} Bux`}))
+    setValues(prevValues => ({...prevValues, singleMascot: newSingleMascot, currency: `${newSingleMascot} Bux`}))
   }
 
   const inputs = [
