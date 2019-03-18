@@ -1,19 +1,38 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, MouseEvent } from 'react';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
+import './ProductCard.css'
+
+interface handleUpdateValues {
+    imgUrl: string,
+    title: string,
+    price: string,
+    description: string,
+    inStock: string
+}
 interface ProductCardProps {
-    imgSrc: string
-    title: string
+    imgUrl: string,
+    title: string,
+    price: string,
+    description: string,
+    inStock: string,
+    handleUpdate: (e: any) => void
 }
 
 const ProductCard: FunctionComponent<ProductCardProps> = (props) => {
-    console.log('image source: ', props.imgSrc)
+    const {imgUrl, title, price, description, inStock} = props;
+    console.log('image source: ', imgUrl)
+
     return (
-        <Card style={{ width: '200px', border:'1px solid #CCC', padding: '5px'}}>
-            <Card.Img variant="top" src={props.imgSrc} />
+        <Card style={{ width: '200px', border:'1px solid #CCC', padding: '5px', paddingBottom: '30px'}}>
+            <Card.Img variant="top" src={imgUrl} />
             <hr />
-            <Card.Title style = {{marginBottom: 5}}>{props.title}</Card.Title>
-            <Card.Text>Price: 55</Card.Text>
+            <Card.Title style = {{marginBottom: 5}}>{title}</Card.Title>
+            <Card.Text>{description}</Card.Text>
+            <Card.Text style={{fontWeight: 'bold', marginBottom: 5}}>{price} School Bux</Card.Text>
+            <Card.Text>{inStock} left in stock</Card.Text>
+            <Button className='update-button' variant='dark' size='sm' onClick={props.handleUpdate}>Update Item</Button>
         </Card>
         )
 }

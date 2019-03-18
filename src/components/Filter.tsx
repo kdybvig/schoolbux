@@ -6,7 +6,7 @@ const Filter:FunctionComponent = () => {
 
 
     return (
-        <div className="dark-filter" >
+        <div id="dark-filter" >
         
         </div>
     )
