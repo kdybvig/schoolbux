@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useContext, FormEvent } from 'react';
+import React, { FunctionComponent, useState, useEffect, useContext, FormEvent } from 'react';
 import Form from "react-bootstrap/Form";
 import { Redirect } from 'react-router';
 
@@ -18,11 +18,11 @@ const Login:FunctionComponent = () => {
   const { 
     handleSubmit, 
     handleChange, 
-    values, 
+    values, setValues,
     isDisabled, setIsDisabled, 
     error, setError
   } = useForm(submitFunction)
-
+  
   const {user, password} = values;
 
   const { login, user: username}  = useContext(UserContext);
@@ -47,11 +47,11 @@ const Login:FunctionComponent = () => {
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="loginUser">
           <Form.Label className="user-form-label">Email or username</Form.Label>
-          <Form.Control required disabled={isDisabled} placeholder="Enter email or username" name='user' value={user} onChange={handleChange} />
+          <Form.Control required disabled={isDisabled} placeholder="Enter email or username" name='user' value={user || ''} onChange={handleChange} />
         </Form.Group>
         <Form.Group controlId="loginPassword">
           <Form.Label className="user-form-label">Password</Form.Label>
-          <Form.Control required disabled={isDisabled} type="password" placeholder="Password" name='password' value={password} onChange={handleChange}/>
+          <Form.Control required disabled={isDisabled} type="password" placeholder="Password" name='password' value={password || ''} onChange={handleChange}/>
         </Form.Group>
         <Button variant="success" type="submit">
           Sign In

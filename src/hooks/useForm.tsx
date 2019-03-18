@@ -4,8 +4,8 @@ import React, { FunctionComponent, useState, FormEvent } from 'react';
 interface values {
     [key: string] : (string)
 }
-const useForm = (submitFunction: (e: FormEvent<Element>) => void) => {
-    const [values, setValues] = useState<values>({});
+const useForm = (submitFunction: (e: FormEvent<Element>) => void,  initialValues?: values) => {
+    const [values, setValues] = useState<values>(initialValues? initialValues: {});
     const [isDisabled, setIsDisabled] = useState(false);
     const [error, setError] = useState('');
 
