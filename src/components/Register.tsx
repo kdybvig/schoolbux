@@ -59,7 +59,7 @@ const Register:FunctionComponent = () => {
     {name: 'password', text: 'Password', type: 'password', value: password}, 
     {name: 'confirm', text:'Confirm Password', type: 'password', value: confirm},
     {name: 'school', text: 'School Name', type: 'text', value: school },
-    {name: 'mascot', text: 'School Mascot', type: 'text', value: mascot, onBlur: handleMascotBlur, optional: true},
+    {name: 'mascot', text: 'School Mascot (optional)', type: 'text', value: mascot, onBlur: handleMascotBlur, optional: true},
     {name: 'currency', text: 'School Currency', type: 'text', value: currency}
   ]
   if(redirect) return <Redirect to='/' />
@@ -74,7 +74,15 @@ const Register:FunctionComponent = () => {
             return (
             <Form.Group key={index} controlId={`register${capitalize(input.name)}`}>
               <Form.Label className="user-form-label">{input.text}</Form.Label>
-              <Form.Control required={!input.optional} disabled={isDisabled} type={input.type} placeholder={input.text.toLowerCase()} value={input.value} onBlur={input.onBlur}  name={input.name} onChange={handleChange} />
+              <Form.Control 
+                required={!input.optional} 
+                disabled={isDisabled} 
+                type={input.type} 
+                placeholder={input.text.toLowerCase()}
+                value={input.value} onBlur={input.onBlur}  
+                name={input.name} 
+                onChange={handleChange} 
+              />
             </Form.Group>
             )
           })
