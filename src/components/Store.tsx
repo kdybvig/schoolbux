@@ -54,7 +54,6 @@ const Store:FunctionComponent = () => {
             newProducts.push(product)
         } else {
             newProducts[activeProductIndex] = product;
-            setActiveProductIndex(-1)
         }
         setProducts(newProducts)
         closeForm()       
@@ -67,12 +66,12 @@ const Store:FunctionComponent = () => {
         } else {
             newProducts.splice(activeProductIndex,1)
         }
-        setActiveProductIndex(-1)
         setProducts(newProducts)
         closeForm()
     }
 
     const closeForm = () => {
+        setActiveProductIndex(-1)
         setIsFormOpen(false)
         setFormProps(initialFormProps)
     }
