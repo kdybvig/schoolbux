@@ -23,6 +23,16 @@
     color: white;
 }
 
+.btn-circle:hover {
+    background-color: #DDAA32;
+    color: black;
+}
+
+.btn-circle:active {
+    background-color: #DDAA32!important;
+    color: black!important;
+}
+
 #product-form .form-group {
     margin: 10px 0px;
 }
