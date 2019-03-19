@@ -104,7 +104,7 @@ const Store:FunctionComponent = () => {
                         />
                     </div>
             }
-            <Button variant='warning' onClick={openForm}>Add Item</Button>
+            <Button variant='greenish' onClick={openForm}>Add Item</Button>
             <div id="store-items">
                 {
                     products.map((product, index) => {

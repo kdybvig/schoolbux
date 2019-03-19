@@ -3,3 +3,13 @@
     flex-wrap: wrap;
     margin-top: 20px;
 }
+
+.btn-greenish {
+    background-color: #35645C;
+    color: white;
+}
+
+.btn-greenish:hover, .btn-greenish:active {
+    background-color: #274943;
+    color: white;
+}
