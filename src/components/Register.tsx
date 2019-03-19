@@ -78,7 +78,6 @@ const Register:FunctionComponent = () => {
                 required={!input.optional} 
                 disabled={isDisabled} 
                 type={input.type} 
-                placeholder={input.text.toLowerCase()}
                 value={input.value || ''} 
                 onBlur={input.onBlur}  
                 name={input.name} 

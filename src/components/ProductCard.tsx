@@ -25,8 +25,8 @@ const ProductCard: FunctionComponent<ProductCardProps> = (props) => {
     console.log('image source: ', imgUrl)
 
     return (
-        <Card style={{ width: '200px', border:'1px solid #CCC', padding: '5px', paddingBottom: '30px'}}>
-            <Card.Img variant="top" src={imgUrl} />
+        <Card style={{ width: '200px', backgroundColor: '#EAE3D7', border:'1px solid #CCC', padding: '15px', paddingBottom: '45px'}}>
+            <Card.Img style={{border: '1px solid #AAA'}}variant="top" src={imgUrl} />
             <hr />
             <Card.Title style = {{marginBottom: 5}}>{title}</Card.Title>
             <Card.Text>{description}</Card.Text>

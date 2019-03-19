@@ -47,11 +47,11 @@ const Login:FunctionComponent = () => {
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="loginUser">
           <Form.Label className="user-form-label">Email or username</Form.Label>
-          <Form.Control required disabled={isDisabled} placeholder="Enter email or username" name='user' value={user || ''} onChange={handleChange} />
+          <Form.Control required disabled={isDisabled} name='user' value={user || ''} onChange={handleChange} />
         </Form.Group>
         <Form.Group controlId="loginPassword">
           <Form.Label className="user-form-label">Password</Form.Label>
-          <Form.Control required disabled={isDisabled} type="password" placeholder="Password" name='password' value={password || ''} onChange={handleChange}/>
+          <Form.Control required disabled={isDisabled} placeholder="Password" name='password' value={password || ''} onChange={handleChange}/>
         </Form.Group>
         <Button variant="success" type="submit">
           Sign In

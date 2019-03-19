@@ -2,6 +2,8 @@
     text-align: center;
     font-size: 1.8rem;
     margin-bottom: 20px;
+    color: #42095C;
+    font-weight: bold;
 }
 
 .user-form-label {
@@ -9,4 +11,8 @@
     font-weight: bold;
     margin-left: 8px;
     margin-bottom: 2px;
+}
+
+.form-group {
+    margin-bottom: 10px;
 }
