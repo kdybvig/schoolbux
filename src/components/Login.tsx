@@ -51,7 +51,7 @@ const Login:FunctionComponent = () => {
         </Form.Group>
         <Form.Group controlId="loginPassword">
           <Form.Label className="user-form-label">Password</Form.Label>
-          <Form.Control required disabled={isDisabled} placeholder="Password" name='password' value={password || ''} onChange={handleChange}/>
+          <Form.Control required disabled={isDisabled} type="password" name='password' value={password || ''} onChange={handleChange}/>
         </Form.Group>
         <Button variant="success" type="submit">
           Sign In
