@@ -61,9 +61,9 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
             <Button variant='dark' className='btn-circle' onClick={props.closeForm}>X</Button>
             {
                 preview? 
-                    <img className="product-preview" src={preview}/> :
+                    <div className='product-preview-empty' style={{background: `url(${preview}) center center / contain no-repeat`}}></div> :
                     imgUrl ?
-                        <img className="product-preview" src={imgUrl}/> :
+                        <div className='product-preview-empty'><img className="product-preview" src={imgUrl}/></div> :
                         <div className='product-preview-empty'></div>
             }
             <Form.Group controlId='productName'>

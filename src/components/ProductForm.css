@@ -37,11 +37,13 @@
     margin: 10px 0px;
 }
 .product-preview {
-    width: 200px;
-    height: 200px;
+    max-width: 200px;
+    max-height: 200px;
+    margin: auto;
 }
 
 .product-preview-empty {
+    text-align: center;
     width: 200px;
     height: 200px;
     background-color: #CCCCCC;
