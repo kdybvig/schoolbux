@@ -65,7 +65,7 @@ const Register:FunctionComponent = () => {
   if(redirect) return <Redirect to='/' />
 
   return (
-    <div className="col-sm-6 offset-sm-3">
+    <div className="col-lg-6 offset-lg-3 col-md-4 offset-md-4 col-sm-6 offset-sm-3">
       <h1 className="user-form-title">Create account</h1> 
       {error && <p style={{color: 'red'}}>{error}</p>}
       <Form onSubmit={handleSubmit}>

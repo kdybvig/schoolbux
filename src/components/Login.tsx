@@ -41,7 +41,7 @@ const Login:FunctionComponent = () => {
 
   if ( redirect ) return <Redirect to='/'/>
   return (
-    <div className="col-sm-6 offset-sm-3">
+    <div className="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
       <h1 className="user-form-title">Sign In</h1> 
       <p style={{color: 'red'}}>{error}</p>
       <Form onSubmit={handleSubmit}>
