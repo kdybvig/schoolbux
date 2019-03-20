@@ -68,7 +68,7 @@ const Register:FunctionComponent = () => {
     <div className="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
       <h1 className="user-form-title">Create account</h1> 
       {error && <p style={{color: 'red'}}>{error}</p>}
-      <Form onSubmit={handleSubmit}>
+      <Form className='user-form' onSubmit={handleSubmit}>
         {
           inputs.map((input, index) => {
             return (

@@ -16,3 +16,8 @@
 .form-group {
     margin-bottom: 10px;
 }
+
+.user-form {
+    max-width: 300px;
+    margin: 0px auto;
+}

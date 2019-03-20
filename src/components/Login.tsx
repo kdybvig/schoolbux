@@ -44,7 +44,7 @@ const Login:FunctionComponent = () => {
     <div className="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
       <h1 className="user-form-title">Sign In</h1> 
       <p style={{color: 'red'}}>{error}</p>
-      <Form onSubmit={handleSubmit}>
+      <Form className='user-form' onSubmit={handleSubmit}>
         <Form.Group controlId="loginUser">
           <Form.Label className="user-form-label">Email or username</Form.Label>
           <Form.Control required disabled={isDisabled} name='user' value={user || ''} onChange={handleChange} />
