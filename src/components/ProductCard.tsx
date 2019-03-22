@@ -25,7 +25,7 @@ const ProductCard: FunctionComponent<ProductCardProps> = (props) => {
 
     return (
         <Card className='product-card'>
-            <Card.Img style={{border: '1px solid #AAA', width: 170, height: 170 }}variant="top" src={imgUrl} />
+            <Card.Img style={{border: '1px solid #AAA', width: 210, height: 210 }}variant="top" src={imgUrl} />
             <hr />
             <Card.Title style = {{marginBottom: 5}}>{title}</Card.Title>
             <Card.Text>{description}</Card.Text>
