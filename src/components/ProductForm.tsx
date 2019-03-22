@@ -106,12 +106,12 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
                 />
             </Form.Group>
             <Form.Group controlId='productDescription'>
-                <Form.Label className="user-form-label">Description (optional)</Form.Label>
+                <Form.Label className="user-form-label">Short Description (optional)</Form.Label>
                 <Form.Control 
                     disabled={isDisabled || state.isLoading} 
                     as='textarea'
                     rows={3}
-                    maxLength={200}
+                    maxLength={50}
                     className='product-textarea-input'
                     name='description' 
                     value={description || ''} 
