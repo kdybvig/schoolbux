@@ -51,18 +51,18 @@ const Store:FunctionComponent = () => {
     }
 
     const addItem = async(product: newProduct) => {
-        await dispatch({type: 'PUT_ADD_ITEM', payload:product})
-        closeForm()      
+        const error = await dispatch({type: 'PUT_ADD_ITEM', payload:product})
+        if(!error)closeForm()      
     }
 
     const updateItem = async(product: oldProduct) => {
-        await dispatch({type: 'PUT_UPDATE_ITEM', payload:product})
-        closeForm()    
+        const error = await dispatch({type: 'PUT_UPDATE_ITEM', payload:product})
+        if(!error)closeForm()    
     }
 
     const removeItem = async() => {
-        await dispatch({type: 'DELETE_REMOVE_ITEM', payload: curId})
-        closeForm()
+        const error = await dispatch({type: 'DELETE_REMOVE_ITEM', payload: curId})
+        if(!error)closeForm()
     }
 
     const closeForm = () => {

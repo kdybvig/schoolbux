@@ -1,4 +1,5 @@
 import { StoreAction, StoreState, productValuesWithId, oldProduct, newProduct, StoreAsyncAction, PutItemReturnInterface, DeleteItemReturnInterface } from "../types/StoreTypes";
+import { faArrowAltCircleDown } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -74,7 +75,7 @@ const token: string | null = localStorage.getItem('jwtToken')
 
 
 async function putNewItem (item: newProduct): Promise<PutItemReturnInterface> {
-    const url = apiUrl + '/item/'
+    const url = apiUrl + '/newitem/'
 
     const formData = new FormData();
     Object.entries(item).forEach(entry=> formData.append(entry[0], entry[1]))
@@ -172,7 +173,6 @@ async function getInitialItems () {
         }
         return {success: false, items: null, error: response.error};
     } catch(err) {
-        console.log(err);
         return {success: false,  items: null, error: 'Network error'};
     }
 }
@@ -180,6 +180,7 @@ async function getInitialItems () {
 
 export function dispatchWithAsync (dispatch: any) {
     return async (action: StoreAsyncAction) => {
+
         switch(action.type) {
             case 'GET_INITIAL_ITEMS' : {
                 dispatch({type: 'LOADING'})
@@ -195,18 +196,20 @@ export function dispatchWithAsync (dispatch: any) {
                 dispatch({type: 'LOADING'})
                 const newItemData = await putNewItem(action.payload)
                 if(newItemData.error) {
-                    dispatch({type: 'ERROR', payload: newItemData.error})
+                    await dispatch({type: 'ERROR', payload: newItemData.error})
+                    return 'error'
+                }
+                else {
+                    await dispatch({type: 'ADD_ITEM', payload: newItemData.item})
                     return
                 }
-                dispatch({type: 'ADD_ITEM', payload: newItemData.item})
-                return
             }
             case 'PUT_UPDATE_ITEM' : {
                 dispatch({type: 'LOADING'})
                 const updatedItemData = await updateItem(action.payload)
                 if(updatedItemData.error) {
                     dispatch({type: 'ERROR', payload: updatedItemData.error})
-                    return
+                    return 'error'
                 }
                 dispatch({type: 'UPDATE_ITEM', payload: updatedItemData.item})
                 return
@@ -216,7 +219,7 @@ export function dispatchWithAsync (dispatch: any) {
                 const updatedItemData = await removeItem(action.payload)
                 if(updatedItemData.error) {
                     dispatch({type: 'ERROR', payload: updatedItemData.error})
-                    return
+                    return 'error'
                 }
                 dispatch({type: 'REMOVE_ITEM', payload: action.payload})
                 return
