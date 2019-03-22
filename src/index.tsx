@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { UserProvider } from './components/UserProvider';
+import { StoreProvider } from './components/StoreContext';
 
 
 ReactDOM.render((
     <UserProvider>
-        <App />
+        <StoreProvider>
+            <App />
+        </StoreProvider>
     </UserProvider>
 ), document.getElementById('root'));
 

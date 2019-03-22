@@ -1,22 +1,27 @@
-import React, { FunctionComponent, useState, FormEvent, useEffect } from 'react';
+import React, { FunctionComponent, useState, FormEvent, useEffect, useContext } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import './ProductForm.css'
 
 import useForm from '../hooks/useForm';
-import { productValues } from './Store';
+import { StoreContext } from './StoreContext';
+import { newProduct, oldProduct } from '../types/StoreTypes';
 
  interface ProductFormProps {
+    image: null | File,
     imgUrl: string,
     title: string,
     price: string,
     description: string,
     inStock: string,
     newItem: boolean,
+    _id: string,
     closeForm: () => void,
-    addItem: (product: productValues) => void,
-    removeItem: () => void
+    addItem: (product: newProduct) => void,
+    updateItem: (product: oldProduct) => void,
+    removeItem: () => void,
+    updateImage: (newImage: File | null) => void
 }
 
 
@@ -24,6 +29,7 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
     
     const [imgUrl, setImageUrl] = useState(props.imgUrl)
     const [preview, setPreview] = useState<any>('')
+    const {state} = useContext(StoreContext)
 
     const { 
         handleSubmit, 
@@ -37,7 +43,8 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
     const {title, price, description, inStock} = values;
 
     function submitFunction(e: FormEvent<Element>) {
-        props.addItem({title, price, description, imgUrl: preview ? preview: imgUrl, inStock})
+        if(props._id) props.updateItem({title, price, description, image: props.image, _id: props._id, inStock})
+        if(props.image && !props._id) props.addItem({title, price, description, image: props.image, inStock})
     }
 
     const handleDescriptionChange = (e: any)  => {
@@ -46,8 +53,9 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
         setValues(prevValues => ({...prevValues, description: newDescription}))
     }
 
-    const previewImage = (e: any) => {
+    const addImage = (e: any) => {
         e.preventDefault()
+        props.updateImage(e.target.files[0])
         setPreview(URL.createObjectURL(e.target.files[0]));
     }
 
@@ -58,6 +66,7 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
 
     return (
         <Form onSubmit={handleSubmit} id="product-form">
+            {state.error && <p style={{color: 'red'}}>{state.error}</p>}
             <Button variant='dark' className='btn-circle' onClick={props.closeForm}>X</Button>
             {
                 preview? 
@@ -70,18 +79,18 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
                 <Form.Label className="user-form-label">Item Name</Form.Label>
                 <Form.Control 
                     required={!imgUrl}
-                    disabled={isDisabled} 
+                    disabled={isDisabled || state.isLoading} 
                     type='file'
                     accept='image/*'
                     className='product-file-input'
-                    onChange={previewImage}
+                    onChange={addImage}
                 />
             </Form.Group>
             <Form.Group controlId='productName'>
                 <Form.Label className="user-form-label">Item Name</Form.Label>
                 <Form.Control 
                     required 
-                    disabled={isDisabled} 
+                    disabled={isDisabled || state.isLoading} 
                     type='text'
                     className='product-text-input'
                     placeholder='Item Name'
@@ -94,7 +103,7 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
             <Form.Group controlId='productDescription'>
                 <Form.Label className="user-form-label">Description (optional)</Form.Label>
                 <Form.Control 
-                    disabled={isDisabled} 
+                    disabled={isDisabled || state.isLoading} 
                     as='textarea'
                     rows={3}
                     maxLength={200}
@@ -108,7 +117,7 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
                 <Form.Label className="user-form-label">Price</Form.Label>
                 <Form.Control 
                     required 
-                    disabled={isDisabled} 
+                    disabled={isDisabled || state.isLoading} 
                     type='number'
                     min='0'
                     max='9999'
@@ -122,7 +131,7 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
                 <Form.Label className="user-form-label">In Stock</Form.Label>
                 <Form.Control 
                     required 
-                    disabled={isDisabled} 
+                    disabled={isDisabled || state.isLoading} 
                     type='number'
                     min='0'
                     max='9999'
