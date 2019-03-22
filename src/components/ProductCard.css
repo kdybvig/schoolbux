@@ -5,14 +5,24 @@
     color: white;
 }
 
-#product-card img {
-    width: 200px;
-    height: 200px;
-}
-
-#store-items .card {
+#store-items .product-card {
     margin-right: 20px;
     margin-bottom: 20px;
     padding: 10px;
+    width: 200px;
+    background-color: #EAE3D7;
+    border:1px solid #CCC;
+    padding: 15px; 
+    padding-bottom: 45px;
+}
+
+#store-items .product-card.empty-box {
+    height: 0px;
+    background-color: yellow;
+    margin-right: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding: 0px 10px;
+    border: none
 }
 
