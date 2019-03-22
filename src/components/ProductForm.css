@@ -24,10 +24,12 @@
     color: white;
 }
 
-.btn-circle:hover {
+.btn-circle:hover, .btn-circle.hover {
     background-color: #DDAA32;
     color: black;
 }
+
+
 
 .btn-circle:active {
     background-color: #DDAA32!important;

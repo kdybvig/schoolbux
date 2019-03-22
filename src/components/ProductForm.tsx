@@ -7,6 +7,7 @@ import './ProductForm.css'
 import useForm from '../hooks/useForm';
 import { StoreContext } from './StoreContext';
 import { newProduct, oldProduct } from '../types/StoreTypes';
+import useKeyPress from '../hooks/useKeyPress';
 
  interface ProductFormProps {
     image: null | File,
@@ -30,6 +31,13 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
     const [imgUrl, setImageUrl] = useState(props.imgUrl)
     const [preview, setPreview] = useState<string>('')
     const {state} = useContext(StoreContext)
+    const [escDown, escReleased] = useKeyPress(['Esc', 'Escape'])
+
+    useEffect(() => {
+        if(escReleased) {
+            closeFormWithConfirm()
+        }
+    }, [escReleased])
 
     const { 
         handleSubmit, 
@@ -64,6 +72,12 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
         setPreview(URL.createObjectURL(e.target.files[0]));
     }
 
+    function closeFormWithConfirm () {
+        const confirmed = window.confirm('Are you sure? Close without saving?')
+        if(confirmed) props.closeForm()
+        return
+    }
+
     const confirmRemoveItem = () => {
         const confirmed = window.confirm('Are you sure?  The item will be permanently deleted.')
         if(confirmed) props.removeItem()
@@ -72,7 +86,7 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
     return (
         <Form onSubmit={handleSubmit} id="product-form">
             {state.error && <p style={{color: 'red'}}>{state.error}</p>}
-            <Button variant='dark' className='btn-circle' onClick={props.closeForm}>X</Button>
+            <Button variant='dark' className={escDown ? 'btn-circle hover' : 'btn-circle'} onClick={closeFormWithConfirm}>X</Button>
             {
                 preview? 
                     <div className='product-preview-empty' style={{background: `url(${preview}) center center / contain no-repeat`}}></div> :
