@@ -29,9 +29,11 @@ const ProductCard: FunctionComponent<ProductCardProps> = (props) => {
             <hr />
             <Card.Title style = {{marginBottom: 5}}>{title}</Card.Title>
             <Card.Text>{description}</Card.Text>
-            <Card.Text style={{fontWeight: 'bold', marginBottom: 5}}>{price} School Bux</Card.Text>
-            <Card.Text>{inStock} left in stock</Card.Text>
-            <Button className='update-button' variant='dark' size='sm' onClick={props.handleUpdate}>Update Item</Button>
+            <div className='on-bottom'>
+                <Card.Text style={{fontWeight: 'bold', marginBottom: 0}}>{price} School Bux</Card.Text>
+                <Card.Text>{inStock} left in stock</Card.Text>
+                <Button className='update-button' variant='dark' size='sm' onClick={props.handleUpdate}>Update Item</Button>
+            </div>
         </Card>
         )
 }
