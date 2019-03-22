@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useContext } from 'react';
+import React, { FunctionComponent, useState, useContext, useEffect, useRef, useCallback } from 'react';
 import './Navigation.css';
 import { LinkContainer } from 'react-router-bootstrap';
 import Nav from 'react-bootstrap/Nav';
@@ -7,9 +7,17 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faClipboardList, faStoreAlt, faUserCircle, faUser } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from './UserProvider'
+import { useOnClickOutside } from '../hooks/useOnClickOutside';
 
 const Navigation:FunctionComponent = () => {
     const { user, logout, isAuth } = useContext(UserContext)
+    const [expanded, setExpanded] = useState(false)
+    const navRef =useRef(null)
+    useOnClickOutside(navRef, closeNav) 
+
+    function closeNav (e: MouseEvent | TouchEvent) {
+        setExpanded(false)
+    }
 
     const setLinks = () => {
         return isAuth ? 
@@ -22,8 +30,8 @@ const Navigation:FunctionComponent = () => {
     const links = setLinks();
  
     return (
-        <div>
-            <Navbar expand='md' fixed='top' bg='dark-grey' variant='dark' className="d-flex">
+        <div ref={navRef}>
+            <Navbar onToggle={(isExpanded: boolean)=> setExpanded(!expanded)} onSelect={()=>setExpanded(false)} expanded={expanded} expand='md' fixed='top' bg='dark-grey' variant='dark' className="d-flex">
                 <LinkContainer to="/">  
                     <Navbar.Brand>School Bux</Navbar.Brand>
                 </LinkContainer>
