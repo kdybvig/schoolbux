@@ -28,7 +28,7 @@ import { newProduct, oldProduct } from '../types/StoreTypes';
 const ProductForm:FunctionComponent<ProductFormProps> = (props) => {  
     
     const [imgUrl, setImageUrl] = useState(props.imgUrl)
-    const [preview, setPreview] = useState<any>('')
+    const [preview, setPreview] = useState<string>('')
     const {state} = useContext(StoreContext)
 
     const { 
@@ -55,6 +55,11 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
 
     const addImage = (e: any) => {
         e.preventDefault()
+        if(!e.target.files[0]) {
+            props.updateImage(null)
+            setPreview('')
+            return
+        } 
         props.updateImage(e.target.files[0])
         setPreview(URL.createObjectURL(e.target.files[0]));
     }
@@ -76,7 +81,7 @@ const ProductForm:FunctionComponent<ProductFormProps> = (props) => {
                         <div className='product-preview-empty'></div>
             }
             <Form.Group controlId='productName'>
-                <Form.Label className="user-form-label">Item Name</Form.Label>
+                <Form.Label className="user-form-label">Image</Form.Label>
                 <Form.Control 
                     required={!imgUrl}
                     disabled={isDisabled || state.isLoading} 
