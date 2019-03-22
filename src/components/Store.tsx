@@ -45,7 +45,8 @@ const Store:FunctionComponent = () => {
 
     if(!isAuth) return <Unauthorized />
 
-    const openForm = async() => {
+    const openForm = () => {
+        window.scrollTo(0, 0)
         console.log(state)
         setIsFormOpen(true)
     }
@@ -67,11 +68,13 @@ const Store:FunctionComponent = () => {
 
     const closeForm = () => {
         setIsFormOpen(false)
+        setImage(null)
         setFormProps(initialFormProps)
         setCurId('')
     }
     
     const handleUpdate = (index: number) => {
+        window.scrollTo(0, 0)
         const price = products[index].price.toString();
         const inStock = products[index].inStock.toString();
         const {title, description, imgUrl, _id} = products[index];
