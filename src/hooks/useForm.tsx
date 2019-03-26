@@ -21,7 +21,7 @@ const useForm = (submitFunction: (e: FormEvent<Element>) => void,  initialValues
     }
 
     const capitalize = (str: string): string => {
-        if(str.indexOf(' ') > 0) return (
+        if(str.indexOf(' ') >= 0) return (
           str.split(' ').map(str => capitalize(str)).join(' ')
         ) 
         return str.charAt(0).toUpperCase() + str.slice(1);
