@@ -87,7 +87,7 @@ interface DeleteRemoveItemInterface {
     payload: string
 }
 
-export type StoreAsyncAction = PutAddItemInterface | PutUpdateItemInterface | DeleteRemoveItemInterface | StoreAction | GetInitialItemsInterface
+export type StoreAsyncAction = PutAddItemInterface | PutUpdateItemInterface | DeleteRemoveItemInterface | GetInitialItemsInterface
 
 //store fetch returns
 
